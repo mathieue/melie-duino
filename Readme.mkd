@@ -1,0 +1,25 @@
+# Melie Duino
+
+Provide a web interface to control an arduino with the serial / usb communication.
+
+## Install
+You must have ruby and rubygems installed
+
+    gem install bundle
+    bundle install
+
+
+1 launch the serial socket gateway (last argument is your serial device)
+    
+    ./serial-socket-gateway/serial-socket-gateway  /dev/tty.usbmodemfd121
+
+2 launch the broker: serial gateway / websocket communications
+    
+    ruby broker.rb
+
+3 launch the sinatra app (web interface)
+
+    ruby sinatra-app.rb
+
+Go to the web interface at:
+http://localhost:4567/

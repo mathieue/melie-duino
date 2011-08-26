@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <script src='js/swfobject.js'></script>
+    <script src='js/FABridge.js'></script>
+    <script src='js/web_socket.js'></script>
+    <script src='js/jquery-1.6.2.min.js'></script>
+    <script>
+      $(document).ready(function() {
+        function debug(string) {
+          var element = document.getElementById("debug");
+          var p = document.createElement("p");
+          p.appendChild(document.createTextNode(string));
+          $('#debug').prepend(p);
+        }
+
+        var Socket = "MozWebSocket" in window ? MozWebSocket : WebSocket;
+        var ws = new Socket("ws://localhost:8080/");
+        ws.onmessage = function(evt) { debug(evt.data); };
+        ws.onclose = function() { debug("socket closed"); };
+        ws.onopen = function() {
+          debug("connected...");
+          ws.send("hello server");
+          ws.send("hello again");
+        };
+
+        $('#pin13on').click(function() {
+          $(this).addClass('disabled');
+          var that = $(this);
+          $.ajax({
+            url: "/pin13on",
+            context: document.body,
+            success: function(){
+              that.removeClass('disabled');
+              debug('pin 13 on ok');
+            }
+          });
+          return false;
+        });
+
+        $('#pin13off').click(function() {
+          $(this).addClass('disabled');
+          var that = $(this);
+          $.ajax({
+            url: "/pin13off",
+            context: document.body,
+            success: function(){
+              that.removeClass('disabled');
+              debug('pin 13 off ok');
+            }
+          });
+          return false;
+        });
+
+      });
+    </script>
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.1.0.min.css">
+  </head>
+  <body>
+    <div class="topbar-wrapper" style="z-index: 5;">
+      <div class="topbar">
+        <div class="fill">
+          <div class="container">
+            <h3><a href="#">Melie Duino</a></h3>
+          </div>
+        </div> <!-- /fill -->
+      </div> <!-- /topbar -->
+    </div>
+    <div class="container" style="margin-top: 80px;">
+        <fieldset>
+        <button type="submit" id="pin13on" class="btn primary">Pin 13 On</button>&nbsp;<button id="pin13off" class="btn danger">Pin 13 Off</button>
+        </fieldset>
+      <div class="well" style="margin-top: 19px; padding: 14px 19px;">
+        <div id="debug" style="height: 200px; overflow-y: scroll;"></div>
+      </div>
+    </div>
+  </body>
+</html>

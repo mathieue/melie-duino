@@ -1,0 +1,6 @@
+source "http://rubygems.org"
+gem "serialport"
+gem "eventmachine"
+gem "ArgsParser"
+gem "em-websocket"
+gem "sinatra"
