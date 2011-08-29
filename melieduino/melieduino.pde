@@ -12,11 +12,11 @@ void setup() {
 void loop() {
   // read the sensor:
   if (Serial.available() > 0) {
-    int inByte = Serial.read();
+    unsigned char inChar = Serial.read();
     
     // debug
-    Serial.println(byte(inByte));
-    switch (inByte) {
+    Serial.println(inChar);
+    switch (inChar) {
     case 'a':    
       digitalWrite(13, HIGH);
       break;
