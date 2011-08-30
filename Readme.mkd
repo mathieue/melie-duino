@@ -5,7 +5,9 @@ Provide a web interface to control an arduino with the serial / usb communicatio
 ## Install
 You must have ruby and rubygems installed
 
-    gem install bundle
+Install bundler and the required gem:
+
+    gem install bundler
     bundle install
 
 
@@ -15,11 +17,11 @@ You must have ruby and rubygems installed
 
 2 launch the broker: serial gateway / websocket communications
     
-    ruby broker.rb
+	ruby broker-daemon.rb start
 
 3 launch the sinatra app (web interface)
 
-    ruby sinatra-app.rb
+	ruby webserver-daemon.rb start
 
 Go to the web interface at:
 http://localhost:4567/

@@ -1,0 +1,7 @@
+broker.pid
+broker.log
+broker.output
+webserver.log
+sinatra-app.rb.output
+sinatra-app.rb.pid
+webserver.output
